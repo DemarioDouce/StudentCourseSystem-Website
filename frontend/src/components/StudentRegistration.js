@@ -85,7 +85,7 @@ function StudentRegistration(props) {
                   name="studentNumber"
                   id="studentNumber"
                   rows="3"
-                  placeholder="Enter student number"
+                  placeholder="Student number"
                   value={student.studentNumber}
                   onChange={onChange}
                 />
@@ -106,7 +106,7 @@ function StudentRegistration(props) {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      placeholder="Enter first name"
+                      placeholder="First name"
                       value={student.firstName}
                       onChange={onChange}
                     />
@@ -127,8 +127,53 @@ function StudentRegistration(props) {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      placeholder="Enter last name"
+                      placeholder="Last name"
                       value={student.lastName}
+                      onChange={onChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Control
+                      style={{
+                        width: "100%",
+                        padding: "12px 20px",
+                        margin: "8px 0",
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                      }}
+                      type="text"
+                      name="email"
+                      id="email"
+                      rows="3"
+                      placeholder="Email"
+                      value={student.email}
+                      onChange={onChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Control
+                      style={{
+                        width: "100%",
+                        padding: "12px 20px",
+                        margin: "8px 0",
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                      }}
+                      type="text"
+                      name="username"
+                      id="username"
+                      placeholder="Username"
+                      value={student.username}
                       onChange={onChange}
                     />
                   </Form.Group>
@@ -146,92 +191,59 @@ function StudentRegistration(props) {
                     boxSizing: "border-box",
                   }}
                   type="text"
-                  name="email"
-                  id="email"
-                  rows="3"
-                  placeholder="Enter email"
-                  value={student.email}
-                  onChange={onChange}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                  type="text"
-                  name="username"
-                  id="username"
-                  placeholder="Enter student username"
-                  value={student.username}
-                  onChange={onChange}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                  type="text"
                   name="password"
                   id="password"
-                  placeholder="Enter password"
+                  placeholder="Password"
                   value={student.password}
                   onChange={onChange}
                 />
               </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                  type="text"
-                  name="address"
-                  id="address"
-                  rows="3"
-                  placeholder="Enter student address"
-                  value={student.address}
-                  onChange={onChange}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                  type="text"
-                  name="city"
-                  id="city"
-                  rows="3"
-                  placeholder="Enter city"
-                  value={student.city}
-                  onChange={onChange}
-                />
-              </Form.Group>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Control
+                      style={{
+                        width: "100%",
+                        padding: "12px 20px",
+                        margin: "8px 0",
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                      }}
+                      type="text"
+                      name="address"
+                      id="address"
+                      rows="3"
+                      placeholder="Address"
+                      value={student.address}
+                      onChange={onChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Control
+                      style={{
+                        width: "100%",
+                        padding: "12px 20px",
+                        margin: "8px 0",
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                      }}
+                      type="text"
+                      name="city"
+                      id="city"
+                      rows="3"
+                      placeholder="City"
+                      value={student.city}
+                      onChange={onChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
               <Form.Group>
                 <Form.Control
                   style={{
@@ -247,7 +259,7 @@ function StudentRegistration(props) {
                   name="phoneNumber"
                   id="phoneNumber"
                   rows="3"
-                  placeholder="Enter phone number"
+                  placeholder="Phone number"
                   value={student.phoneNumber}
                   onChange={onChange}
                 />
@@ -267,7 +279,7 @@ function StudentRegistration(props) {
                   name="program"
                   id="program"
                   rows="3"
-                  placeholder="Enter program"
+                  placeholder="Program"
                   value={student.program}
                   onChange={onChange}
                 />
