@@ -1,4 +1,4 @@
-﻿// Load the module dependencies
+// Load the module dependencies
 const Student = require("mongoose").model("Student");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -18,7 +18,7 @@ const getErrorMessage = function (err) {
       // If a unique index error occurs set the message error
       case 11000:
       case 11001:
-        message = "Student already exists";
+        message = "Username already exists";
         break;
       // If a general error occurs set the message error
       default:
@@ -34,13 +34,13 @@ const getErrorMessage = function (err) {
   // Return the message error
   return message;
 };
-// Create a new student
+// Create a new user
 exports.create = function (req, res, next) {
-  // Create a new instance of the 'Student' Mongoose model
+  // Create a new instance of the 'User' Mongoose model
   var student = new Student(req.body); //get data from React form
   console.log("body: " + req.body.username);
 
-  // Use the 'Student' instance's 'save' method to save a new student document
+  // Use the 'User' instance's 'save' method to save a new user document
   student.save(function (err) {
     if (err) {
       // Call the next middleware with an error message
@@ -52,9 +52,9 @@ exports.create = function (req, res, next) {
   });
 };
 //
-// Returns all students
+// Returns all users
 exports.list = function (req, res, next) {
-  // Use the 'Student' instance's 'find' method to retrieve a new student document
+  // Use the 'User' instance's 'find' method to retrieve a new user document
   Student.find({}, function (err, students) {
     if (err) {
       return next(err);
@@ -64,15 +64,15 @@ exports.list = function (req, res, next) {
   });
 };
 //
-//'read' controller method to display a student
+//'read' controller method to display a user
 exports.read = function (req, res) {
   // Use the 'response' object to send a JSON response
   res.json(req.student);
 };
 //
-// 'studentByID' controller method to find a student by its id
+// 'userByID' controller method to find a user by its id
 exports.studentByID = function (req, res, next, id) {
-  // Use the 'Student' static 'findOne' method to retrieve a specific student
+  // Use the 'User' static 'findOne' method to retrieve a specific user
   Student.findOne(
     {
       _id: id,
@@ -82,7 +82,7 @@ exports.studentByID = function (req, res, next, id) {
         // Call the next middleware with an error message
         return next(err);
       } else {
-        // Set the 'req.student' property
+        // Set the 'req.user' property
         req.student = student;
         console.log(student);
         // Call the next middleware
@@ -91,7 +91,7 @@ exports.studentByID = function (req, res, next, id) {
     }
   );
 };
-//update a student by id
+//update a user by id
 exports.update = function (req, res, next) {
   console.log(req.body);
   Student.findByIdAndUpdate(req.student.id, req.body, function (err, student) {
@@ -102,7 +102,7 @@ exports.update = function (req, res, next) {
     res.json(student);
   });
 };
-// delete a student by id
+// delete a user by id
 exports.delete = function (req, res, next) {
   Student.findByIdAndRemove(req.student.id, req.body, function (err, student) {
     if (err) return next(err);
@@ -110,7 +110,7 @@ exports.delete = function (req, res, next) {
   });
 };
 //
-// authenticates a student
+// authenticates a user
 exports.authenticate = function (req, res, next) {
   // Get credentials from request
   console.log(req.body);
@@ -118,7 +118,7 @@ exports.authenticate = function (req, res, next) {
   const password = req.body.auth.password;
   console.log(password);
   console.log(username);
-  //find the student with given username using static method findOne
+  //find the user with given username using static method findOne
   Student.findOne({ username: username }, (err, student) => {
     if (err) {
       return next(err);
@@ -126,7 +126,7 @@ exports.authenticate = function (req, res, next) {
       console.log(student);
       //compare passwords
       if (bcrypt.compareSync(password, student.password)) {
-        // Create a new token with the student id in the payload
+        // Create a new token with the user id in the payload
         // and which expires 300 seconds after issue
         const token = jwt.sign(
           { id: student._id, username: student.username },
@@ -142,8 +142,8 @@ exports.authenticate = function (req, res, next) {
         });
         res.status(200).send({ screen: student.username });
         //
-        //res.json({status:"success", message: "student found!!!", data:{student:
-        //student, token:token}});
+        //res.json({status:"success", message: "user found!!!", data:{user:
+        //user, token:token}});
 
         req.student = student;
         //call the next middleware
@@ -186,7 +186,7 @@ exports.welcome = (req, res) => {
     return res.status(400).end();
   }
 
-  // Finally, return the welcome message to the student, along with their
+  // Finally, return the welcome message to the user, along with their
   // username given in the token
   // use back-quotes here
   res.send(`${payload.username}`);
@@ -197,10 +197,10 @@ exports.welcome = (req, res) => {
 exports.signout = (req, res) => {
   res.clearCookie("token");
   return res.status("200").json({ message: "signed out" });
-  // Redirect the student back to the main application page
+  // Redirect the user back to the main application page
   //res.redirect('/');
 };
-//check if the student is signed in
+//check if the user is signed in
 exports.isSignedIn = (req, res) => {
   // Obtain the session token from the requests cookies,
   // which come with every request
@@ -230,7 +230,7 @@ exports.isSignedIn = (req, res) => {
   res.status(200).send({ screen: payload.username });
 };
 
-//isAuthenticated() method to check whether a student is currently authenticated
+//isAuthenticated() method to check whether a user is currently authenticated
 exports.requiresLogin = function (req, res, next) {
   // Obtain the session token from the requests cookies,
   // which come with every request
@@ -249,6 +249,7 @@ exports.requiresLogin = function (req, res, next) {
     payload = jwt.verify(token, jwtKey);
     console.log("in requiresLogin - payload:", payload);
     req.id = payload.id;
+    //req.usernameFromPayload = payload.username;
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
       // if the error thrown is because the JWT is unauthorized, return a 401 error
@@ -257,7 +258,7 @@ exports.requiresLogin = function (req, res, next) {
     // otherwise, return a bad request error
     return res.status(400).end();
   }
-  // student is authenticated
+  // user is authenticated
   //call next function in line
   next();
 };

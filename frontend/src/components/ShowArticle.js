@@ -9,7 +9,7 @@ function ShowArticle(props) {
   console.log("props.match.params", props.match.params.id);
   const [data, setData] = useState({});
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "http://localhost:3000/api/articles/" + props.match.params.id;
+  const apiUrl = "http://localhost:3000/api/courses/" + props.match.params.id;
 
   useEffect(() => {
     setShowLoading(false);

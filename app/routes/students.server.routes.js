@@ -1,4 +1,4 @@
-﻿// Load the 'students' controller
+// Load the 'students' controller
 var students = require("../../app/controllers/students.server.controller");
 var express = require("express");
 var router = express.Router();
@@ -22,7 +22,7 @@ module.exports = function (app) {
   //be called only once in a request - response cycle,
   //even if the parameter is matched in multiple routes
   app.param("studentId", students.studentByID);
-  //authenticate student
+  //authenticate user
   app.post("/signin", students.authenticate);
   app.get("/signout", students.signout);
   app.get("/read_cookie", students.isSignedIn);

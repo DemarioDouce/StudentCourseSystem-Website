@@ -7,10 +7,10 @@ import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom";
 
 function EditArticle(props) {
-  console.log("edituser props:", props.match.params);
+  console.log("editstudent props:", props.match.params);
   const [article, setArticle] = useState({ _id: "", title: "", content: "" });
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "http://localhost:3000/api/articles/" + props.match.params.id;
+  const apiUrl = "http://localhost:3000/api/courses/" + props.match.params.id;
   //runs only once after the first render
   useEffect(() => {
     setShowLoading(false);
@@ -38,7 +38,7 @@ function EditArticle(props) {
       })
       .catch((error) => setShowLoading(false));
   };
-  //runs when user enters a field
+  //runs when student enters a field
   const onChange = (e) => {
     e.persist();
     setArticle({ ...article, [e.target.name]: e.target.value });

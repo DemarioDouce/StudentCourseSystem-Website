@@ -1,29 +1,39 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Container, Spinner, Form, Button, Row, Col } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 function StudentRegistration(props) {
-  const [user, setUser] = useState({
+  const [student, setStudent] = useState({
     _id: "",
+    studentNumber: "",
     firstName: "",
     lastName: "",
     email: "",
     username: "",
     password: "",
+    address: "",
+    city: "",
+    phoneNumber: "",
+    program: "",
   });
   const [showLoading, setShowLoading] = useState(false);
   const apiUrl = "http://localhost:3000/";
 
-  const saveUser = (e) => {
+  const saveStudent = (e) => {
     setShowLoading(true);
     e.preventDefault();
     const data = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      username: user.username,
-      password: user.password,
+      studentNumber: student.studentNumber,
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email,
+      username: student.username,
+      password: student.password,
+      address: student.address,
+      city: student.city,
+      phoneNumber: student.phoneNumber,
+      program: student.program,
     };
     axios
       .post(apiUrl, data)
@@ -36,7 +46,7 @@ function StudentRegistration(props) {
 
   const onChange = (e) => {
     e.persist();
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   return (
@@ -59,7 +69,27 @@ function StudentRegistration(props) {
               <Spinner animation="border" role="status"></Spinner>
             )}
             <h1>REGISTER</h1>
-            <Form onSubmit={saveUser}>
+            <Form onSubmit={saveStudent}>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="studentNumber"
+                  id="studentNumber"
+                  rows="3"
+                  placeholder="Enter student number"
+                  value={student.studentNumber}
+                  onChange={onChange}
+                />
+              </Form.Group>
               <Row>
                 <Col>
                   <Form.Group>
@@ -77,7 +107,7 @@ function StudentRegistration(props) {
                       name="firstName"
                       id="firstName"
                       placeholder="Enter first name"
-                      value={user.firstName}
+                      value={student.firstName}
                       onChange={onChange}
                     />
                   </Form.Group>
@@ -98,7 +128,7 @@ function StudentRegistration(props) {
                       name="lastName"
                       id="lastName"
                       placeholder="Enter last name"
-                      value={user.lastName}
+                      value={student.lastName}
                       onChange={onChange}
                     />
                   </Form.Group>
@@ -120,7 +150,7 @@ function StudentRegistration(props) {
                   id="email"
                   rows="3"
                   placeholder="Enter email"
-                  value={user.email}
+                  value={student.email}
                   onChange={onChange}
                 />
               </Form.Group>
@@ -138,8 +168,8 @@ function StudentRegistration(props) {
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="Enter user name"
-                  value={user.username}
+                  placeholder="Enter student username"
+                  value={student.username}
                   onChange={onChange}
                 />
               </Form.Group>
@@ -158,11 +188,90 @@ function StudentRegistration(props) {
                   name="password"
                   id="password"
                   placeholder="Enter password"
-                  value={user.password}
+                  value={student.password}
                   onChange={onChange}
                 />
               </Form.Group>
-
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="address"
+                  id="address"
+                  rows="3"
+                  placeholder="Enter student address"
+                  value={student.address}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="city"
+                  id="city"
+                  rows="3"
+                  placeholder="Enter city"
+                  value={student.city}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="phoneNumber"
+                  id="phoneNumber"
+                  rows="3"
+                  placeholder="Enter phone number"
+                  value={student.phoneNumber}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="program"
+                  id="program"
+                  rows="3"
+                  placeholder="Enter program"
+                  value={student.program}
+                  onChange={onChange}
+                />
+              </Form.Group>
               <Button
                 style={{
                   border: "none",
@@ -180,6 +289,25 @@ function StudentRegistration(props) {
               >
                 REGISTER
               </Button>
+              <Link to="/">
+                <Button
+                  style={{
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="danger"
+                  type="button"
+                >
+                  CANCEL
+                </Button>
+              </Link>
             </Form>
           </div>
         </div>

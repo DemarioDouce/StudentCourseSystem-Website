@@ -5,7 +5,7 @@ import axios from "axios";
 import View from "./View";
 //
 function App() {
-  //state variable for the screen, admin or user
+  //state variable for the screen, admin or student
   const [screen, setScreen] = useState("auth");
   //store input field data, user name and password
   const [username, setUsername] = useState();
@@ -34,7 +34,7 @@ function App() {
     }
   };
 
-  //check if the user already logged-in
+  //check if the student already logged-in
   const readCookie = async () => {
     try {
       console.log("--- in readCookie function ---");
@@ -52,7 +52,7 @@ function App() {
     }
   };
   //runs the first time the view is rendered
-  //to check if user is signed in
+  //to check if student is signed in
   useEffect(() => {
     readCookie();
   }, []); //only the first render

@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom";
 
-function EditUser(props) {
-  const [user, setUser] = useState({
+function EditStudent(props) {
+  const [student, setStudent] = useState({
     _id: "",
     firstName: "",
     lastName: "",
@@ -16,14 +16,14 @@ function EditUser(props) {
     password: "",
   });
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "http://localhost:3000/users/" + props.match.params.id;
+  const apiUrl = "http://localhost:3000/students/" + props.match.params.id;
   //runs only once after the first render
   useEffect(() => {
     setShowLoading(false);
     //call api
     const fetchData = async () => {
       const result = await axios(apiUrl);
-      setUser(result.data);
+      setStudent(result.data);
       console.log(result.data);
       setShowLoading(false);
     };
@@ -31,14 +31,14 @@ function EditUser(props) {
     fetchData();
   }, [apiUrl]);
 
-  const updateUser = (e) => {
+  const updateStudent = (e) => {
     setShowLoading(true);
     e.preventDefault();
     const data = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      username: user.username,
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email,
+      username: student.username,
     };
     axios
       .put(apiUrl, data)
@@ -48,10 +48,10 @@ function EditUser(props) {
       })
       .catch((error) => setShowLoading(false));
   };
-  //runs when user enters a field
+  //runs when student enters a field
   const onChange = (e) => {
     e.persist();
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   return (
@@ -62,7 +62,7 @@ function EditUser(props) {
         </Spinner>
       )}
       <Jumbotron>
-        <Form onSubmit={updateUser}>
+        <Form onSubmit={updateStudent}>
           <Form.Group>
             <Form.Label> First Name</Form.Label>
             <Form.Control
@@ -70,7 +70,7 @@ function EditUser(props) {
               name="firstName"
               id="firstName"
               placeholder="Enter first name"
-              value={user.firstName}
+              value={student.firstName}
               onChange={onChange}
             />
           </Form.Group>
@@ -81,7 +81,7 @@ function EditUser(props) {
               name="lastName"
               id="lastName"
               placeholder="Enter last name"
-              value={user.lastName}
+              value={student.lastName}
               onChange={onChange}
             />
           </Form.Group>
@@ -93,7 +93,7 @@ function EditUser(props) {
               id="email"
               rows="3"
               placeholder="Enter email"
-              value={user.email}
+              value={student.email}
               onChange={onChange}
             />
           </Form.Group>
@@ -104,7 +104,7 @@ function EditUser(props) {
               name="username"
               id="username"
               placeholder="Enter user name"
-              value={user.username}
+              value={student.username}
               onChange={onChange}
             />
           </Form.Group>
@@ -118,4 +118,4 @@ function EditUser(props) {
   );
 }
 
-export default withRouter(EditUser);
+export default withRouter(EditStudent);

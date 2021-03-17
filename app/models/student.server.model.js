@@ -1,4 +1,4 @@
-﻿// Load the module dependencies
+// Load the module dependencies
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 //
 // Define a new 'StudentSchema'
 var StudentSchema = new Schema({
+  studentNumber: Number,
   firstName: String,
   lastName: String,
   email: {
@@ -31,6 +32,10 @@ var StudentSchema = new Schema({
       "Password should be longer",
     ],
   },
+  address: String,
+  city: String,
+  phoneNumber: String,
+  program: String,
 });
 
 // Set the 'fullname' virtual property
@@ -52,10 +57,10 @@ StudentSchema.pre("save", function (next) {
   next();
 });
 
-// Create an instance method for authenticating student
+// Create an instance method for authenticating user
 StudentSchema.methods.authenticate = function (password) {
   //compare the hashed password of the database
-  //with the hashed version of the password the student enters
+  //with the hashed version of the password the user enters
   return this.password === bcrypt.hashSync(password, saltRounds);
 };
 

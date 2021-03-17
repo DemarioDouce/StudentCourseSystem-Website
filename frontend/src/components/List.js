@@ -8,7 +8,7 @@ import Login from "./Login";
 function List(props) {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
-  const apiUrl = "http://localhost:3000/users";
+  const apiUrl = "http://localhost:3000/students";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +16,7 @@ function List(props) {
         .get(apiUrl)
         .then((result) => {
           console.log("result.data:", result.data);
-          //check if the user has logged in
+          //check if the student has logged in
           if (result.data.screen !== "auth") {
             console.log("data in if:", result.data);
             setData(result.data);
