@@ -4,11 +4,11 @@
   "description": "Express react Example",
   "main": "server.js",
   "author": {
-    "name": "inika",
-    "email": ""
+    "name": "Demario Douce",
+    "email": "ddouce1@my.centennialcollege.ca"
   },
   "dependencies": {
-    "bcrypt": "^4.0.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
