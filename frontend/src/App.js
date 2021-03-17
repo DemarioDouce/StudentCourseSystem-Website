@@ -1,44 +1,66 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-//
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import "./App.css";
-//
-import List from "./components/List";
-import EditUser from "./components/EditUser";
-import EditArticle from "./components/EditArticle";
-
-import CreateUser from "./components/CreateUser";
-import ShowUser from "./components/ShowUser";
-import ShowArticle from "./components/ShowArticle";
-
-import Login from "./components/Login";
-//
+import { Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 function App() {
   return (
-    <Router>
-      <Navbar bg="light" expand="lg">
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/list">List of Users</Nav.Link>
-            <Nav.Link href="/create">Sign Up</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-
-      <div>
-        <Route render={() => <Login />} path="/login" />
-        <Route render={() => <List />} path="/list" />
-        <Route render={() => <EditUser />} path="/edit/:id" />
-        <Route render={() => <CreateUser />} path="/create" />
-        <Route render={() => <ShowUser />} path="/show/:id" />
-        <Route render={() => <ShowArticle />} path="/showarticle/:id" />
-        <Route render={() => <EditArticle />} path="/editarticle/:id" />
-      </div>
-    </Router>
+    <>
+      <Container>
+        <div className="text-center">
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              margin: "auto",
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            <h1>STUDENT COURSE SYSTEM</h1>
+            <div>
+              <Link to="/login">
+                <Button
+                  style={{
+                    backgroundColor: "#4CAF50",
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="primary"
+                >
+                  LOGIN
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button
+                  style={{
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="primary"
+                >
+                  REGISTER
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
   );
 }
 export default App;
