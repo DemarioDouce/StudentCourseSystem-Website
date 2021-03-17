@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
+import { Container, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 //
 import View from "./View";
 //
@@ -58,26 +60,111 @@ function App() {
   }, []); //only the first render
   //
   return (
-    <div className="App">
-      {screen === "auth" ? (
-        <div>
-          <label>Username: </label>
-          <br />
-          <input type="text" onChange={(e) => setUsername(e.target.value)} />
-          <br />
-          <label>Password: </label>
-          <br />
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button onClick={auth}>Login</button>
+    <>
+      <Container>
+        <div className="text-center">
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              margin: "auto",
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            {screen === "auth" ? (
+              <Form>
+                <h1>LOGIN</h1>
+                <Form.Group>
+                  <Form.Control
+                    style={{
+                      width: "100%",
+                      padding: "12px 20px",
+                      margin: "8px 0",
+                      display: "inline-block",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                      boxSizing: "border-box",
+                    }}
+                    name="username"
+                    id="username"
+                    rows="3"
+                    placeholder="Username"
+                    type="text"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control
+                    style={{
+                      width: "100%",
+                      padding: "12px 20px",
+                      margin: "8px 0",
+                      display: "inline-block",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                      boxSizing: "border-box",
+                    }}
+                    name="password"
+                    id="password"
+                    rows="3"
+                    placeholder="Password"
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Group>
+                <Button
+                  style={{
+                    backgroundColor: "#4CAF50",
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="primary"
+                  type="button"
+                  onClick={auth}
+                >
+                  LOGIN
+                </Button>
+                <Link to="/">
+                  <Button
+                    style={{
+                      border: "none",
+                      color: "white",
+                      padding: "15px 32px",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                      margin: "10px",
+                    }}
+                    variant="danger"
+                    type="button"
+                  >
+                    CANCEL
+                  </Button>
+                </Link>
+              </Form>
+            ) : (
+              <>
+                <h1>DASHBOARD</h1>
+                <View screen={screen} setScreen={setScreen} />
+              </>
+            )}
+          </div>
         </div>
-      ) : (
-        <View screen={screen} setScreen={setScreen} />
-      )}
-    </div>
+      </Container>
+    </>
   );
 }
 
