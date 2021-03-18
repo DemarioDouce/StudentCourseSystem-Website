@@ -56,7 +56,7 @@ function ListCourses(props) {
                   showDetail(item._id);
                 }}
               >
-                {item.title}
+                {item.courseName}
               </ListGroup.Item>
             ))}
           </ListGroup>

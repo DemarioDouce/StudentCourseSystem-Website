@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Spinner from "react-bootstrap/Spinner";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Container, Spinner, Form, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
 function EditCourse(props) {
@@ -57,66 +54,126 @@ function EditCourse(props) {
   };
 
   return (
-    <div>
-      {showLoading && (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      )}
-      <Jumbotron>
-        <Form onSubmit={updateCourse}>
-          <Form.Group>
-            <Form.Label> Title</Form.Label>
-            <Form.Control
-              type="text"
-              name="courseCode"
-              id="courseCode"
-              placeholder="Course code"
-              value={course.courseCode}
-              onChange={onChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label> Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="courseName"
-              id="courseName"
-              placeholder="Course"
-              value={course.courseName}
-              onChange={onChange}
-            />
-          </Form.Group>
+    <>
+      <Container>
+        <div className="text-center">
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              margin: "auto",
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            {showLoading && (
+              <Spinner animation="border" role="status"></Spinner>
+            )}
+            <h1>UPDATE COURSE</h1>
+            <Form onSubmit={updateCourse}>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="courseCode"
+                  id="courseCode"
+                  placeholder="Course code"
+                  value={course.courseCode}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="courseName"
+                  id="courseName"
+                  placeholder="Course name"
+                  value={course.courseName}
+                  onChange={onChange}
+                />
+              </Form.Group>
 
-          <Form.Group>
-            <Form.Label> Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="section"
-              id="section"
-              placeholder="Course"
-              value={course.section}
-              onChange={onChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label> Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="semester"
-              id="semester"
-              placeholder="Course"
-              value={course.semester}
-              onChange={onChange}
-            />
-          </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="section"
+                  id="section"
+                  placeholder="Section"
+                  value={course.section}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  name="semester"
+                  id="semester"
+                  placeholder="Semester"
+                  value={course.semester}
+                  onChange={onChange}
+                />
+              </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Update Article
-          </Button>
-        </Form>
-      </Jumbotron>
-    </div>
+              <Button
+                style={{
+                  border: "none",
+                  color: "white",
+                  padding: "15px 32px",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  fontSize: "15px",
+                  fontWeight: "bold",
+                  margin: "10px",
+                }}
+                variant="primary"
+                type="submit"
+              >
+                UPDATE
+              </Button>
+            </Form>
+          </div>
+        </div>
+      </Container>
+    </>
   );
 }
 

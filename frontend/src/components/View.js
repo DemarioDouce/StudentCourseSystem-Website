@@ -1,6 +1,6 @@
 import CreateCourse from "./CreateCourse";
 import React, { useState } from "react";
-//
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Button, Container } from "react-bootstrap";
 //
@@ -10,7 +10,7 @@ function View(props) {
   // return a stateful value and funcion to update it
   const [data, setData] = useState();
   //
-  const [article, setArticle] = useState("");
+  const [course, setCourse] = useState("");
   // called when student clicks on Logout button
   // to clear the cookie and set the screen state variable
   // back to its initial state.
@@ -35,14 +35,10 @@ function View(props) {
     }
   };
   //
-  const listArticles = (username) => {
-    console.log("in lisArticles: ", username);
-    //setArticle('n')
-  };
   //
-  const createArticle = () => {
-    console.log("in createArticle");
-    setArticle("y");
+  const createCourse = () => {
+    console.log("in createCourse");
+    setCourse("y");
   };
   //
   return (
@@ -61,7 +57,7 @@ function View(props) {
               height: "50vh",
             }}
           >
-            {article !== "y" ? (
+            {course !== "y" ? (
               <>
                 <h1>DASHBOARD</h1>
                 <p>Welcome back {screen}.</p>
@@ -101,30 +97,30 @@ function View(props) {
                   }}
                   variant="primary"
                   type="button"
-                  onClick={createArticle}
+                  onClick={createCourse}
                 >
                   ADD COURSE
                 </Button>
-                <Button
-                  style={{
-                    backgroundColor: "#393232",
-                    border: "none",
-                    color: "white",
-                    padding: "15px 32px",
-                    textAlign: "center",
-                    textDecoration: "none",
-                    display: "inline-block",
-                    fontSize: "15px",
-                    fontWeight: "bold",
-                    margin: "10px",
-                  }}
-                  variant="primary"
-                  type="button"
-                  onClick={listArticles(data)}
-                >
-                  LIST ALL COURSE
-                </Button>
-
+                <Link to="/listcourses">
+                  <Button
+                    style={{
+                      backgroundColor: "#393232",
+                      border: "none",
+                      color: "white",
+                      padding: "15px 32px",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                      margin: "10px",
+                    }}
+                    variant="primary"
+                    type="button"
+                  >
+                    MY COURSES
+                  </Button>
+                </Link>
                 <Button
                   style={{
                     backgroundColor: "#ac0d0d",
