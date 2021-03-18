@@ -5,7 +5,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { withRouter } from "react-router-dom";
 import Login from "./Login";
 
-function ListArticles(props) {
+function ListCourses(props) {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
   const apiUrl = "http://localhost:3000/api/courses";
@@ -34,7 +34,7 @@ function ListArticles(props) {
 
   const showDetail = (id) => {
     props.history.push({
-      pathname: "/showarticle/" + id,
+      pathname: "/showcourse/" + id,
     });
   };
 
@@ -68,4 +68,4 @@ function ListArticles(props) {
   );
 }
 //
-export default withRouter(ListArticles);
+export default withRouter(ListCourses);

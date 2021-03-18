@@ -157,7 +157,6 @@ function App() {
               </Form>
             ) : (
               <>
-                <h1>DASHBOARD</h1>
                 <View screen={screen} setScreen={setScreen} />
               </>
             )}

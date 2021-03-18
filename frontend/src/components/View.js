@@ -1,7 +1,8 @@
-import CreateArticle from "./CreateArticle";
+import CreateCourse from "./CreateCourse";
 import React, { useState } from "react";
 //
 import axios from "axios";
+import { Button, Container } from "react-bootstrap";
 //
 function View(props) {
   // read the info from props, coming from the ancestor component
@@ -28,7 +29,7 @@ function View(props) {
     try {
       const res = await axios.get("/welcome");
       console.log(res.data);
-      setData(res.data);
+      setData("Cookie varified " + res.data + ".");
     } catch (e) {
       console.log(e);
     }
@@ -45,21 +46,112 @@ function View(props) {
   };
   //
   return (
-    <div className="App">
-      {article !== "y" ? (
-        <div>
-          <p>{screen}</p>
-          <p>{data}</p>
-          <button onClick={verifyCookie}>Verify Cookie</button>
-          <button onClick={createArticle}>Create Article</button>
-          <button onClick={listArticles(data)}>List Articles</button>
+    <>
+      <Container>
+        <div className="text-center">
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              margin: "auto",
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            {article !== "y" ? (
+              <>
+                <h1>DASHBOARD</h1>
+                <p>Welcome back {screen}.</p>
+                <p>{data}</p>
+                <Button
+                  style={{
+                    backgroundColor: "#3a6351",
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="primary"
+                  type="button"
+                  onClick={verifyCookie}
+                >
+                  VERIFY COOKIE
+                </Button>
 
-          <button onClick={deleteCookie}>Log out</button>
+                <Button
+                  style={{
+                    backgroundColor: "#e48257",
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="primary"
+                  type="button"
+                  onClick={createArticle}
+                >
+                  ADD COURSE
+                </Button>
+                <Button
+                  style={{
+                    backgroundColor: "#393232",
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="primary"
+                  type="button"
+                  onClick={listArticles(data)}
+                >
+                  LIST ALL COURSE
+                </Button>
+
+                <Button
+                  style={{
+                    backgroundColor: "#ac0d0d",
+                    border: "none",
+                    color: "white",
+                    padding: "15px 32px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    margin: "10px",
+                  }}
+                  variant="primary"
+                  type="button"
+                  onClick={deleteCookie}
+                >
+                  LOGOUT
+                </Button>
+              </>
+            ) : (
+              <CreateCourse screen={screen} setScreen={setScreen} />
+            )}
+          </div>
         </div>
-      ) : (
-        <CreateArticle screen={screen} setScreen={setScreen} />
-      )}
-    </div>
+      </Container>
+    </>
   );
 }
 

@@ -5,7 +5,7 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom";
 
-function ShowArticle(props) {
+function ShowCourse(props) {
   console.log("props.match.params", props.match.params.id);
   const [data, setData] = useState({});
   const [showLoading, setShowLoading] = useState(true);
@@ -26,7 +26,7 @@ function ShowArticle(props) {
 
   const editArticle = (id) => {
     props.history.push({
-      pathname: "/editarticle/" + id,
+      pathname: "/editcourse/" + id,
     });
   };
 
@@ -38,7 +38,7 @@ function ShowArticle(props) {
       .delete(apiUrl, article)
       .then((result) => {
         setShowLoading(false);
-        props.history.push("/listarticles");
+        props.history.push("/listcourses");
       })
       .catch((error) => setShowLoading(false));
   };
@@ -80,4 +80,4 @@ function ShowArticle(props) {
   );
 }
 
-export default withRouter(ShowArticle);
+export default withRouter(ShowCourse);

@@ -1,45 +1,44 @@
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom";
-import React, { useState } from "react";
 
-//
-function CreateArticle(props) {
-  //
-  const username = props.screen;
-  console.log("props.screen", props.screen);
-  const [article, setArticle] = useState({
-    _id: "",
-    title: "",
-    content: "",
-    username: "",
-  });
-  const [showLoading, setShowLoading] = useState(false);
-  //
-  const apiUrl = "http://localhost:3000/api/courses";
-  //
-  const saveArticle = (e) => {
+function EditCourse(props) {
+  console.log("editstudent props:", props.match.params);
+  const [article, setArticle] = useState({ _id: "", title: "", content: "" });
+  const [showLoading, setShowLoading] = useState(true);
+  const apiUrl = "http://localhost:3000/api/courses/" + props.match.params.id;
+  //runs only once after the first render
+  useEffect(() => {
+    setShowLoading(false);
+    //call api
+    const fetchData = async () => {
+      const result = await axios(apiUrl);
+      setArticle(result.data);
+      console.log(result.data);
+      setShowLoading(false);
+    };
+
+    fetchData();
+  }, [apiUrl]);
+
+  const updateArticle = (e) => {
     setShowLoading(true);
     e.preventDefault();
-    const data = {
-      title: article.title,
-      content: article.content,
-      username: username,
-    };
-    //
+    const data = { title: article.title, content: article.content };
     axios
-      .post(apiUrl, data)
+      .put(apiUrl, data)
       .then((result) => {
+        console.log("after calling put to update", result.data);
         setShowLoading(false);
-        console.log("results from save article:", result.data);
-        props.history.push("/showarticle/" + result.data._id);
+        props.history.push("/showcourse/" + result.data._id);
       })
       .catch((error) => setShowLoading(false));
   };
-  //
+  //runs when student enters a field
   const onChange = (e) => {
     e.persist();
     setArticle({ ...article, [e.target.name]: e.target.value });
@@ -47,40 +46,38 @@ function CreateArticle(props) {
 
   return (
     <div>
-      <h2> Create an article {username} </h2>
       {showLoading && (
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
         </Spinner>
       )}
       <Jumbotron>
-        <Form onSubmit={saveArticle}>
+        <Form onSubmit={updateArticle}>
           <Form.Group>
             <Form.Label> Title</Form.Label>
             <Form.Control
               type="text"
               name="title"
               id="title"
-              placeholder="Enter title"
+              placeholder="Enter article title"
               value={article.title}
               onChange={onChange}
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label> Content</Form.Label>
+            <Form.Label> Last Name</Form.Label>
             <Form.Control
-              as="textarea"
-              rows="3"
+              type="text"
               name="content"
               id="content"
-              placeholder="Enter Content"
+              placeholder="Enter article content"
               value={article.content}
               onChange={onChange}
             />
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Save Article
+            Update Article
           </Button>
         </Form>
       </Jumbotron>
@@ -88,4 +85,4 @@ function CreateArticle(props) {
   );
 }
 
-export default withRouter(CreateArticle);
+export default withRouter(EditCourse);
