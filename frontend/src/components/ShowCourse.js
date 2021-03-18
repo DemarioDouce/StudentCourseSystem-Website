@@ -58,9 +58,7 @@ function ShowCourse(props) {
             }}
           >
             {showLoading && (
-              <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-              </Spinner>
+              <Spinner animation="border" role="status"></Spinner>
             )}
 
             <h1>Course name: {data.courseName}</h1>

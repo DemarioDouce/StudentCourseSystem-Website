@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ListGroup from "react-bootstrap/ListGroup";
-import Spinner from "react-bootstrap/Spinner";
+import { Container, Spinner, ListGroup } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import Login from "./Login";
 
@@ -39,32 +38,58 @@ function ListCourses(props) {
   };
 
   return (
-    <div>
-      {data.length !== 0 ? (
-        <div>
-          {showLoading && (
-            <Spinner animation="border" role="status">
-              <span className="sr-only">Loading...</span>
-            </Spinner>
-          )}
-          <ListGroup>
-            {data.map((item, idx) => (
-              <ListGroup.Item
-                key={idx}
-                action
-                onClick={() => {
-                  showDetail(item._id);
-                }}
-              >
-                {item.courseName}
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+    <>
+      <Container>
+        <div className="text-center">
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              margin: "auto",
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            {data.length !== 0 ? (
+              <div>
+                {showLoading && (
+                  <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
+                )}
+                <ListGroup>
+                  {data.map((item, idx) => (
+                    <ListGroup.Item
+                      style={{
+                        width: "100%",
+                        padding: "12px 20px",
+                        margin: "8px 0",
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                      }}
+                      key={idx}
+                      action
+                      onClick={() => {
+                        showDetail(item._id);
+                      }}
+                    >
+                      {item.courseName}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
+            ) : (
+              <Login />
+            )}
+          </div>
         </div>
-      ) : (
-        <Login />
-      )}
-    </div>
+      </Container>
+    </>
   );
 }
 //
