@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const CourseSchema = new Schema({
   courseCode: String,
   courseName: String,
-  section: Number,
+  section: String,
   semester: String,
   student: {
     type: Schema.ObjectId,

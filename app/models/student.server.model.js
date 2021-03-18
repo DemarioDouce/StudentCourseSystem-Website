@@ -31,6 +31,7 @@ var StudentSchema = new Schema({
       (password) => password && password.length > 6,
       "Password should be longer",
     ],
+    trim: true,
   },
   address: String,
   city: String,

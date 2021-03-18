@@ -8,7 +8,13 @@ import { withRouter } from "react-router-dom";
 
 function EditCourse(props) {
   console.log("editstudent props:", props.match.params);
-  const [article, setArticle] = useState({ _id: "", title: "", content: "" });
+  const [course, setCourse] = useState({
+    _id: "",
+    courseCode: "",
+    courseName: "",
+    section: "",
+    semester: "",
+  });
   const [showLoading, setShowLoading] = useState(true);
   const apiUrl = "http://localhost:3000/api/courses/" + props.match.params.id;
   //runs only once after the first render
@@ -17,7 +23,7 @@ function EditCourse(props) {
     //call api
     const fetchData = async () => {
       const result = await axios(apiUrl);
-      setArticle(result.data);
+      setCourse(result.data);
       console.log(result.data);
       setShowLoading(false);
     };
@@ -25,10 +31,16 @@ function EditCourse(props) {
     fetchData();
   }, [apiUrl]);
 
-  const updateArticle = (e) => {
+  const updateCourse = (e) => {
     setShowLoading(true);
     e.preventDefault();
-    const data = { title: article.title, content: article.content };
+    const data = {
+      _id: "",
+      courseCode: course.courseCode,
+      courseName: course.courseName,
+      section: course.section,
+      semester: course.semester,
+    };
     axios
       .put(apiUrl, data)
       .then((result) => {
@@ -41,7 +53,7 @@ function EditCourse(props) {
   //runs when student enters a field
   const onChange = (e) => {
     e.persist();
-    setArticle({ ...article, [e.target.name]: e.target.value });
+    setCourse({ ...course, [e.target.name]: e.target.value });
   };
 
   return (
@@ -52,15 +64,15 @@ function EditCourse(props) {
         </Spinner>
       )}
       <Jumbotron>
-        <Form onSubmit={updateArticle}>
+        <Form onSubmit={updateCourse}>
           <Form.Group>
             <Form.Label> Title</Form.Label>
             <Form.Control
               type="text"
-              name="title"
-              id="title"
-              placeholder="Enter article title"
-              value={article.title}
+              name="courseCode"
+              id="courseCode"
+              placeholder="Course code"
+              value={course.courseCode}
               onChange={onChange}
             />
           </Form.Group>
@@ -68,10 +80,33 @@ function EditCourse(props) {
             <Form.Label> Last Name</Form.Label>
             <Form.Control
               type="text"
-              name="content"
-              id="content"
-              placeholder="Enter article content"
-              value={article.content}
+              name="courseName"
+              id="courseName"
+              placeholder="Course"
+              value={course.courseName}
+              onChange={onChange}
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label> Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="section"
+              id="section"
+              placeholder="Course"
+              value={course.section}
+              onChange={onChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label> Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="semester"
+              id="semester"
+              placeholder="Course"
+              value={course.semester}
               onChange={onChange}
             />
           </Form.Group>

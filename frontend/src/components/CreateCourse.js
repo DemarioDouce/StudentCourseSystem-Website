@@ -1,5 +1,4 @@
 import axios from "axios";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import { Container, Spinner, Form, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import React, { useState } from "react";
@@ -68,77 +67,107 @@ function CreateCourse(props) {
             {showLoading && (
               <Spinner animation="border" role="status"></Spinner>
             )}
-            <Jumbotron>
-              <Form onSubmit={saveCourse}>
-                <Form.Group>
-                  <Form.Label> Title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="courseCode"
-                    id="courseCode"
-                    placeholder="Enter title"
-                    value={course.courseCode}
-                    onChange={onChange}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label> Content</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows="3"
-                    name="courseName"
-                    id="courseName"
-                    placeholder="Enter Content"
-                    value={course.courseName}
-                    onChange={onChange}
-                  />
-                </Form.Group>
-
-                <Form.Group>
-                  <Form.Label> Content</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows="3"
-                    name="section"
-                    id="section"
-                    placeholder="section"
-                    value={course.section}
-                    onChange={onChange}
-                  />
-                </Form.Group>
-
-                <Form.Group>
-                  <Form.Label> Content</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows="3"
-                    name="semester"
-                    id="semester"
-                    placeholder="semester"
-                    value={course.semester}
-                    onChange={onChange}
-                  />
-                </Form.Group>
-                <Button
+            <Form onSubmit={saveCourse}>
+              <Form.Group>
+                <Form.Control
                   style={{
-                    backgroundColor: "#e48257",
-                    border: "none",
-                    color: "white",
-                    padding: "15px 32px",
-                    textAlign: "center",
-                    textDecoration: "none",
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
                     display: "inline-block",
-                    fontSize: "15px",
-                    fontWeight: "bold",
-                    margin: "10px",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
                   }}
-                  variant="primary"
-                  type="submit"
-                >
-                  ADD
-                </Button>
-              </Form>
-            </Jumbotron>
+                  type="text"
+                  name="courseCode"
+                  id="courseCode"
+                  placeholder="Course code"
+                  value={course.courseCode}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="textarea"
+                  rows="3"
+                  name="courseName"
+                  id="courseName"
+                  placeholder="Course name"
+                  value={course.courseName}
+                  onChange={onChange}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  rows="3"
+                  name="section"
+                  id="section"
+                  placeholder="Section"
+                  value={course.section}
+                  onChange={onChange}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "100%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  type="text"
+                  rows="3"
+                  name="semester"
+                  id="semester"
+                  placeholder="Semester"
+                  value={course.semester}
+                  onChange={onChange}
+                />
+              </Form.Group>
+              <Button
+                style={{
+                  backgroundColor: "#e48257",
+                  border: "none",
+                  color: "white",
+                  padding: "15px 32px",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  fontSize: "15px",
+                  fontWeight: "bold",
+                  margin: "10px",
+                }}
+                variant="primary"
+                type="submit"
+              >
+                ADD
+              </Button>
+            </Form>
           </div>
         </div>
       </Container>

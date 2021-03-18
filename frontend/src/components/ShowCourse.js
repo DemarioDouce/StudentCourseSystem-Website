@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Spinner from "react-bootstrap/Spinner";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import Button from "react-bootstrap/Button";
+import { Container, Spinner, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 
 function ShowCourse(props) {
@@ -15,7 +13,7 @@ function ShowCourse(props) {
     setShowLoading(false);
     const fetchData = async () => {
       const result = await axios(apiUrl);
-      console.log("results from articles", result.data);
+      console.log("results from courses", result.data);
 
       setData(result.data);
       setShowLoading(false);
@@ -24,18 +22,18 @@ function ShowCourse(props) {
     fetchData();
   }, [apiUrl]);
 
-  const editArticle = (id) => {
+  const editCourse = (id) => {
     props.history.push({
       pathname: "/editcourse/" + id,
     });
   };
 
-  const deleteArticle = (id) => {
+  const deleteCourse = (id) => {
     setShowLoading(true);
-    const article = { title: data.title, content: data.content };
+    const course = { courseCode: data.courseCode, courseName: data.courseName };
     //
     axios
-      .delete(apiUrl, article)
+      .delete(apiUrl, course)
       .then((result) => {
         setShowLoading(false);
         props.history.push("/listcourses");
@@ -44,39 +42,77 @@ function ShowCourse(props) {
   };
 
   return (
-    <div>
-      {showLoading && (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      )}
-      <Jumbotron>
-        <h1>Title: {data.title}</h1>
-        <p>Content: {data.content}</p>
+    <>
+      <Container>
+        <div className="text-center">
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              margin: "auto",
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            {showLoading && (
+              <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            )}
 
-        <p>
-          <Button
-            type="button"
-            variant="primary"
-            onClick={() => {
-              editArticle(data._id);
-            }}
-          >
-            Edit
-          </Button>
-          &nbsp;
-          <Button
-            type="button"
-            variant="danger"
-            onClick={() => {
-              deleteArticle(data._id);
-            }}
-          >
-            Delete
-          </Button>
-        </p>
-      </Jumbotron>
-    </div>
+            <h1>Course name: {data.courseName}</h1>
+            <p1>Course code: {data.courseCode}</p1>
+
+            <div>
+              <Button
+                style={{
+                  border: "none",
+                  color: "white",
+                  padding: "15px 32px",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  fontSize: "15px",
+                  fontWeight: "bold",
+                  margin: "10px",
+                }}
+                type="button"
+                variant="primary"
+                onClick={() => {
+                  editCourse(data._id);
+                }}
+              >
+                Edit
+              </Button>
+
+              <Button
+                style={{
+                  border: "none",
+                  color: "white",
+                  padding: "15px 32px",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  fontSize: "15px",
+                  fontWeight: "bold",
+                  margin: "10px",
+                }}
+                type="button"
+                variant="danger"
+                onClick={() => {
+                  deleteCourse(data._id);
+                }}
+              >
+                DROP
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
   );
 }
 
