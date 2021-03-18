@@ -58,7 +58,7 @@ function ShowStudent(props) {
           Name: {data.firstName}, {data.lastName}
         </h1>
         <p>Email: {data.email}</p>
-        <p>User name: {data.username}</p>
+        <p>Username: {data.username}</p>
 
         <p>
           <Button

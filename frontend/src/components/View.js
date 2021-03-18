@@ -140,6 +140,30 @@ function View(props) {
                 >
                   LOGOUT
                 </Button>
+
+                <footer
+                  style={{
+                    position: "fixed",
+                    left: "0",
+                    bottom: "0",
+                    width: "100%",
+                    backgroundColor: "#eeeeee",
+                    color: "black",
+                    textAlign: "center",
+                  }}
+                >
+                  <p style={{ margin: "20px" }}>
+                    <Link style={{ textDecoration: "none" }} to="/list">
+                      {" "}
+                      VIEW ALL STUDENTS{" "}
+                    </Link>{" "}
+                    ||{" "}
+                    <Link style={{ textDecoration: "none" }} to="/listcourses">
+                      {" "}
+                      VIEW ALL COURSES
+                    </Link>
+                  </p>
+                </footer>
               </>
             ) : (
               <CreateCourse screen={screen} setScreen={setScreen} />

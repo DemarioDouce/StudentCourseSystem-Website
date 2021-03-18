@@ -1,6 +1,7 @@
 # Student Course System
----
-## Screenshot
-![Mockup image.](/Mockups/MockupTestTracker.png)
+
 ---
 
+## Screenshot
+
+## ![Mockup image.](/Mockups/MockupStudentCourseSystem.png)
